@@ -22,9 +22,9 @@ export class UsuarioService {
 
   public auth2: any;
 
-  constructor( private http: HttpClient, 
-                private router: Router,
-                private ngZone: NgZone ) {
+  constructor(private http: HttpClient,
+    private router: Router,
+    private ngZone: NgZone) {
 
     this.googleInit();
   }
@@ -32,10 +32,11 @@ export class UsuarioService {
 
   googleInit() {
 
-    return new Promise( resolve => {
+    return new Promise(resolve => {
       gapi.load('auth2', () => {
         this.auth2 = gapi.auth2.init({
-          client_id: '1045072534136-oqkjcjvo449uls0bttgvl3aejelh22f5.apps.googleusercontent.com',
+          // client_id: '214850903693-a0gp2ue6laalfqqc7qt09rj06eeka38q.apps.googleusercontent.com',
+          client_id: environment.googleClientID,
           cookiepolicy: 'single_host_origin',
         });
 
@@ -60,54 +61,54 @@ export class UsuarioService {
   validarToken(): Observable<boolean> {
     const token = localStorage.getItem('token') || '';
 
-    return this.http.get(`${ base_url }/login/renew`, {
+    return this.http.get(`${base_url}/login/renew`, {
       headers: {
         'x-token': token
       }
     }).pipe(
-      tap( (resp: any) => {
-        localStorage.setItem('token', resp.token );
+      tap((resp: any) => {
+        localStorage.setItem('token', resp.token);
       }),
-      map( resp => true),
-      catchError( error => of(false) )
+      map(resp => true),
+      catchError(error => of(false))
     );
 
   }
 
 
-  crearUsuario( formData: RegisterForm ) {
-    
-    return this.http.post(`${ base_url }/usuarios`, formData )
-              .pipe(
-                tap( (resp: any) => {
-                  localStorage.setItem('token', resp.token )
-                })
-              )
+  crearUsuario(formData: RegisterForm) {
+
+    return this.http.post(`${base_url}/usuarios`, formData)
+      .pipe(
+        tap((resp: any) => {
+          localStorage.setItem('token', resp.token)
+        })
+      )
 
   }
 
-  login( formData: LoginForm ) {
-    
-    return this.http.post(`${ base_url }/login`, formData )
-                .pipe(
-                  tap( (resp: any) => {
-                    localStorage.setItem('token', resp.token )
-                  })
-                );
+  login(formData: LoginForm) {
+
+    return this.http.post(`${base_url}/login`, formData)
+      .pipe(
+        tap((resp: any) => {
+          localStorage.setItem('token', resp.token)
+        })
+      );
 
   }
 
-  loginGoogle( token ) {
-    
-    return this.http.post(`${ base_url }/login/google`, { token } )
-                .pipe(
-                  tap( (resp: any) => {
-                    localStorage.setItem('token', resp.token )
-                  })
-                );
+  loginGoogle(token) {
+
+    return this.http.post(`${base_url}/login/google`, { token })
+      .pipe(
+        tap((resp: any) => {
+          localStorage.setItem('token', resp.token)
+        })
+      );
 
   }
 
-  
+
 
 }
