@@ -1,3 +1,6 @@
+import { environment } from '../../environments/environment';
+
+const baseImgURL = environment.base_url + '/upload/usuarios/';
 
 export class Usuario {
 
@@ -12,6 +15,22 @@ export class Usuario {
     public uid?: string,
   ) { }
 
+  get imagenUrl() {
+    if (this.img) {
+      if (this.google) {
+        return this.img;
+      } else {
+        return `${baseImgURL}${this.img}`
+      }
+    } else {
+      return `${baseImgURL}sin_imagen`;
+    }
+  }
+
+  get NomApe() {
+    const na = this.nombre + ' ' + this.apellidos.slice(0, this.apellidos.indexOf(' '));
+    return na;
+  }
 
 }
 

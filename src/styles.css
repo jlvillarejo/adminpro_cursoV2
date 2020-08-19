@@ -1,19 +1,23 @@
-
-.fast{
-    -webkit-animation-duration: 0.3s;
-    animation-duration: 0.3s;
-    -webkit-animation-fill-mode:both;
-    animation-fill-mode:both
+.fast {
+  -webkit-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
 }
 
-#themecolors .selector, .cursor {
-    cursor: pointer;
+#themecolors .selector,
+.cursor {
+  cursor: pointer;
 }
-
 
 #google-btn {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.img-avatar {
+  width: 200px;
+  height: 200px;
 }
