@@ -19,6 +19,8 @@ export class ModalImagenService {
     return this._ocultarModal;
   }
 
+  constructor() { }
+
   abrirModal(tipo: 'usuarios' | 'medicos' | 'hospitales',
     id: string,
     img: string) {
@@ -28,12 +30,10 @@ export class ModalImagenService {
     this.id = id;
     this.img = img;
 
-
   }
 
   cerrarModal() {
     this._ocultarModal = true;
   }
 
-  constructor() { }
 }

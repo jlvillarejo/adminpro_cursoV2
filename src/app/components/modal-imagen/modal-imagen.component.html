@@ -17,9 +17,8 @@
             <img *ngIf="!imgTemp" [src]="modalImagenServ.img" class="img-avatar">
             <img *ngIf="imgTemp" [src]="imgTemp" class="img-avatar">
           </div>
-
+          <br>
           <input type="file" (change)="CambiarImagen($event.target.files[0])">
-
 
         </div>
         <div class="modal-footer">

@@ -35,6 +35,10 @@
   width: 35px;
 }
 
+.imgHospital {
+  width: 50px;
+}
+
 .oculto {
   display: none;
 }

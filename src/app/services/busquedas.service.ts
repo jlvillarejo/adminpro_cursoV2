@@ -30,6 +30,7 @@ export class BusquedasService {
 
   }
 
+
   buscar(coleccion: 'usuarios' | 'medicos' | 'hospitales',
     termino: string = '') {
 
@@ -42,7 +43,12 @@ export class BusquedasService {
             case 'usuarios':
               return this.transfUser(resp.resultados);
               break;
-
+            case 'hospitales':
+              return resp.resultados;
+              break;
+            case 'medicos':
+              return resp.resultados;
+              break;
             default:
               return [];
           }
