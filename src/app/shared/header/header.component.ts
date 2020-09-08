@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from '../../models/usuario.model';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-header',
@@ -15,16 +17,23 @@ export class HeaderComponent {
   // public NomApe: string = '';
   // public Nombre: String = '';
 
-  constructor(private usuarioService: UsuarioService) {
+  constructor(private usuarioService: UsuarioService,
+              private router: Router) {
     this.usuario = usuarioService.usuario;
-    // this.NomApe = this.usuario.nombre + ' ' + this.usuario.apellidos.slice(0, this.usuario.apellidos.indexOf(' ')); // nombre + 1 apellido
-    // this.Nombre = this.usuario.nombre;
-
-    // console.log(this.Nombre);
   }
 
   logout() {
     this.usuarioService.logout();
   }
 
+  buscar(txt: string) {
+
+    if ( txt.length === 0) {
+
+      Swal.fire('Aviso', 'No se ha introducido ningún termino de búsqueda', 'warning');
+      return;
+    }
+
+    this.router.navigateByUrl(`/dashboard/buscar/${txt}`);
+  }
 }

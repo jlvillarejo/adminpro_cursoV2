@@ -11,19 +11,17 @@ import { Usuario } from '../../models/usuario.model';
 })
 export class SidebarComponent implements OnInit {
 
-  public menuItems: any[];
+  // public menuItems: any[];
   public usuario: Usuario;
 
-  // public NomApe: string = '';
 
-  constructor(private sidebarService: SidebarService,
+  constructor(public sidebarService: SidebarService,
     private usuarioService: UsuarioService) {
 
     this.usuario = usuarioService.usuario;
-    // this.NomApe = this.usuario.nombre + ' ' + this.usuario.apellidos.slice(0, this.usuario.apellidos.indexOf(' '));
 
-    this.menuItems = sidebarService.menu;
-    // console.log(this.menuItems)
+    // this.menuItems = sidebarService.menu;
+
   }
 
   ngOnInit(): void {

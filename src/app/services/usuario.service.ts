@@ -44,6 +44,10 @@ export class UsuarioService {
     return { headers: { 'x-token': this.token } };
   }
 
+  get rol(): 'ADMIN_ROLE' | 'USER_ROLE' {
+    return this.usuario.rol;
+  }
+
   googleInit() {
 
     return new Promise(resolve => {
@@ -61,7 +65,8 @@ export class UsuarioService {
   }
 
   logout() {
-    localStorage.removeItem('token');
+    // localStorage.removeItem('token');
+    this.borrarStorage();
 
     this.auth2.signOut().then(() => {
 
@@ -84,9 +89,10 @@ export class UsuarioService {
         const { nombre, apellidos, email, google, img = '', rol, uid } = resp.usuario;
         this.usuario = new Usuario(nombre, apellidos, email, '', img, google, rol, uid);
 
-        localStorage.setItem('token', resp.token);
+        this.guardarStorage(  resp.token, resp.menu  );
+
         return true;
-        // console.log(this.usuario);
+
       }),
       catchError(error => of(false))
     );
@@ -99,9 +105,9 @@ export class UsuarioService {
     return this.http.post(`${base_url}/usuarios`, formData)
       .pipe(
         tap((resp: any) => {
-          localStorage.setItem('token', resp.token)
+          this.guardarStorage(  resp.token, resp.menu  );
         })
-      )
+      );
 
   }
 
@@ -129,7 +135,7 @@ export class UsuarioService {
     return this.http.post(`${base_url}/login`, formData)
       .pipe(
         tap((resp: any) => {
-          localStorage.setItem('token', resp.token)
+          this.guardarStorage(  resp.token, resp.menu  );
         })
       );
 
@@ -140,7 +146,7 @@ export class UsuarioService {
     return this.http.post(`${base_url}/login/google`, { token })
       .pipe(
         tap((resp: any) => {
-          localStorage.setItem('token', resp.token)
+          this.guardarStorage( resp.token, resp.menu );
         })
       );
 
@@ -171,6 +177,19 @@ export class UsuarioService {
     const url = `${base_url}/usuarios/${usuario.uid}`
     return this.http.delete(url, this.headers);
 
+  }
+
+
+  guardarStorage( token: string, menu: any ) {
+
+    localStorage.setItem( 'token', token );
+    localStorage.setItem( 'menu', JSON.stringify(menu) );
+
+  }
+
+  borrarStorage () {
+    localStorage.removeItem( 'token' );
+    localStorage.removeItem( 'menu' );
   }
 
 }

@@ -46,6 +46,7 @@ export class RegisterComponent {
 
       }, (err) => {
         // Si sucede un error
+        console.log(err);
         Swal.fire('Error', err.error.msg, 'error');
       });
 

@@ -1,0 +1,96 @@
+<div class="row animated fadeIn fast">
+  <div class="col-4">
+      <div class="card">
+          <div class="card-body">
+            <h3>Usuarios</h3>
+
+            <div *ngIf="usuarios.length === 0" class="alert alert-info animated fadeIn fast">
+              <p class="mb-0">No se han encontrado usuarios</p>
+            </div>
+
+            <div *ngIf="usuarios.length > 0" class="table-responsive">
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th>Avatar</th>
+                          <th>Nombre</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let usr of usuarios" class="animated fadeIn fast">
+                          <td>
+                            <img [src]="usr.imagenUrl" alt="Avatar" class="avatar cursor">
+                          </td>
+                          <td>{{usr.NomApe}}</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+
+          </div>
+      </div>
+  </div>
+  <div class="col-4">
+      <div class="card">
+          <div class="card-body">
+            <h3>Médicos</h3>
+
+            <div *ngIf="medicos.length === 0" class="alert alert-info animated fadeIn fast">
+              <p class="mb-0">No se han encontrado médicos</p>
+            </div>
+
+            <div *ngIf="medicos.length > 0" class="table-responsive">
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th>Avatar</th>
+                          <th>Nombre</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let med of medicos" class="cursor animated fadeIn fast"
+                          (click)="abrirMedico(med)">
+                          <td>
+                            <img [src]="med.img | imagen: 'medicos'" alt="Avatar" class="avatar cursor">
+                          </td>
+                          <td>{{med.nombre}}</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+
+          </div>
+      </div>
+  </div>
+  <div class="col-4">
+      <div class="card">
+          <div class="card-body">
+            <h3>Hospitales</h3>
+
+            <div *ngIf="hospitales.length === 0" class="alert alert-info animated fadeIn fast">
+              <p class="mb-0">No se han encontrado hospitales</p>
+            </div>
+
+            <div *ngIf="hospitales.length > 0" class="table-responsive">
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th>Avatar</th>
+                          <th>Nombre</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let h of hospitales" class="animated fadeIn fast">
+                          <td>
+                            <img [src]="h.img | imagen: 'hospitales'" alt="Avatar" class="imgHospital cursor">
+                          </td>
+                          <td>{{h.nombre}}</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+
+          </div>
+      </div>
+  </div>
+</div>
